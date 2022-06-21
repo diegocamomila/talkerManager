@@ -1,6 +1,5 @@
 const express = require('express');
 const getTalker = require('../helpers/getTalker');
-
 const postTalker = require('../helpers/postTalker');
 const check = require('../helpers/check');
 
