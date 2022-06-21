@@ -1,12 +1,12 @@
 const express = require('express');
-const ferify = require('../helpers/ferify');
+const check = require('../helpers/check');
 
 const routerLogin = express.Router();
 
 routerLogin.post(
   '/',
-  ferify.ferifyEmail,
-  ferify.ferifyPassword,
+  check.checkEmail,
+  check.checkPassword,
   (_req, res) => {
     const date = new Date().getTime();
     const token = `a${date}Cd`;
