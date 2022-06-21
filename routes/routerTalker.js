@@ -33,4 +33,24 @@ routerTalker.post('/',
   res.status(201).json(newTalker);
 });
 
+routerTalker.put('/:id', 
+check.checkToken,
+check.checkName,
+check.checkAge,
+check.checkTalker,
+check.checkWatchedAt,
+check.checkRate,
+   async (req, res) => {
+  const { id } = req.params;
+  const talker = await getTalker();
+  talker.map((t, i) => {
+    if (+t.id === +id) {
+      talker[i] = { id: +id, ...req.body };
+    }
+    return t;
+  });
+  postTalker(talker);
+  res.status(200).json({ id: +id, ...req.body });
+});
+
 module.exports = routerTalker;
