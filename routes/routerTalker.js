@@ -5,6 +5,16 @@ const check = require('../helpers/check');
 
 const routerTalker = express.Router();
 
+routerTalker.get('/search', check.checkToken, async (req, res) => {
+  const { q } = req.query;
+  const talker = await getTalker();
+  if (!q || q === '') {
+    return res.status(200).json(talker);
+  }
+  const filterTalker = talker.filter((t) => t.name.includes(q));
+  res.status(200).json(filterTalker);
+});
+
 routerTalker.get('/:id', async (req, res) => {
   const { id } = req.params;
   const talker = await getTalker();
